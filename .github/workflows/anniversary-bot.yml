@@ -1,0 +1,31 @@
+name: Anniversaries (16:00 MSK)
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  anniversaries:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Anniversaries
+        run: node src/anniversaries.js
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          ANNIVERSARY_CHANNEL: ${{ vars.ANNIVERSARY_CHANNEL }}
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}

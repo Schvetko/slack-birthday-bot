@@ -1,0 +1,32 @@
+name: Birthdays (14:00 MSK)
+
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+jobs:
+  birthdays:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Birthdays
+        run: node src/birthdays.js
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          BIRTHDAY_CHANNEL: ${{ vars.BIRTHDAY_CHANNEL }}
+          BIRTHDAY_FIELD_ID: ${{ vars.BIRTHDAY_FIELD_ID }}
+          GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
