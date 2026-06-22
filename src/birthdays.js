@@ -26,11 +26,16 @@ async function fetchRandomBirthdayGif() {
 
 function pickBirthdayStyle() {
   const styles = [
-    'Techy/IT-flavored — make a playful reference to coding, debugging, deployments, or coffee. Fun and nerdy.',
-    'Sweet and heartfelt — warm, sincere, about how much the person means to the team. No tech references.',
-    'Funny and playful — light humor, unexpected comparisons, something that makes people smile. Keep it work-appropriate.',
-    'Hype and energetic — over-the-top celebratory, lots of enthusiasm, make them feel like a rockstar.',
-    'Poetic and creative — a fun metaphor or unexpected angle, something memorable and original.',
+    'Start with a dramatic or unexpected statement about birthdays or aging, then pivot to celebrating them. Surprising opener.',
+    'Reference something universally relatable about birthdays — cake, candles, getting older — with a funny twist.',
+    'Open with "Yo" or a casual street-style greeting. Keep it fun and informal, like a message from a cool friend.',
+    'Use a food or cooking metaphor — they\'re the secret ingredient, the missing spice, the chef\'s special.',
+    'Frame it as a breaking news alert. "BREAKING: Sources confirm it\'s @name\'s birthday..."',
+    'Make a playful IT/tech reference — bugs, deployments, coffee, commits, pull requests. Fun and nerdy.',
+    'Write it as if the whole remote team dropped their laptops and opened Slack just for this moment.',
+    'Use a video game metaphor — they\'re leveling up, unlocking achievements, new season starting.',
+    'Be unexpectedly philosophical for one sentence, then completely flip to party mode.',
+    'Start with a fake complaint ("The problem with @name is...") that turns into a compliment.',
   ];
   return styles[Math.floor(Math.random() * styles.length)];
 }
@@ -43,7 +48,24 @@ async function generateBirthdayGreeting(name) {
     messages: [
       {
         role: 'user',
-        content: `Write a short birthday message from the company to an employee named ${name}. 2-3 sentences in English. Include a direct mention of the person by name (like "@${name}"). No intro, just the message itself. Use this style: ${pickBirthdayStyle()}`,
+        content: `Write a short, witty birthday message from the company to an employee named ${name}.
+Length: 2-3 sentences max.
+
+CRITICAL FORMATTING:
+- Mention them exactly as "@${name}" within the text.
+- No intro ("Hey there!"), no sign-off ("Best, Team"), no hashtags. Just the message.
+
+TONE & STYLE:
+- Casual, tech-savvy, unexpected, and genuinely funny. Target audience: 25-35 y.o. remote IT crowd.
+- STRICTLY AVOID: Boring corporate cliches, generic wishes, and the "you're so great -> we wish you greatness" loops.
+- Keep it natural, like a teammate dropping a casual message in Slack, not a HR template. Feel free to use remote work/tech metaphors naturally.
+
+Use this specific angle for the message: ${pickBirthdayStyle()}
+
+Good examples for inspiration (vary the structure, don't copy):
+1. "BREAKING: Sources confirm it's @Roman Shelekhov's birthday. Witnesses report confetti, cake, and an uncontrollable urge to mute all Slack notifications. More updates as the party develops."
+2. "The problem with @Marina Zavalii is that she makes everyone else look bad by being too good. Happy Birthday — today we officially put our jealousy on hold and just celebrate you."
+3. "@Bodya Marchenko just unlocked a new achievement: +1 year of being absolutely unstoppable. Collect your cake, close your IDE, and enjoy your well-deserved day off."`,
       },
     ],
   });
