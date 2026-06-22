@@ -124,7 +124,7 @@ async function main() {
         console.log(`🏆 Anniversary: ${displayName} (${years} yr${weekend ? ', weekend' : ''})`);
         const greeting = await generateAnniversaryGreeting(displayName, years);
         const weekendNote = weekend
-          ? `\n\n_We know your real work anniversary was on ${formatDate(date)}, but we couldn't let it pass without celebrating! 🎊_`
+          ? `\n\n_P.S. Your work anniversary was on ${formatDate(date)} — we always celebrate weekend anniversaries on Monday! (Also, my settings suggest I always celebrate weekend anniversaries on Monday) 🎊_`
           : '';
         await postAnniversaryMessage(user, greeting, years, weekendNote);
         count++;

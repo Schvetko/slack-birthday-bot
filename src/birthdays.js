@@ -114,7 +114,7 @@ async function main() {
         console.log(`🎂 Birthday: ${displayName} (${birthdayValue}${weekend ? ', weekend' : ''})`);
         const greeting = await generateBirthdayGreeting(displayName);
         const weekendNote = weekend
-          ? `\n\n_We know your real birthday was on ${formatDate(date)}, but it's so hard to stop celebrating! 🎉_`
+          ? `\n\n_P.S. Your birthday was on ${formatDate(date)} — we always celebrate weekend birthdays on Monday! (Also, my settings suggest I always celebrate weekend birthdays on Monday) 🎉_`
           : '';
         await postBirthdayMessage(user, greeting, weekendNote);
         count++;
