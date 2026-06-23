@@ -45,7 +45,7 @@ function pickBirthdayStyle() {
     'Use a food or cooking metaphor — they\'re the secret ingredient, the missing spice, the chef\'s special.',
     'Frame it as a breaking news alert. "BREAKING: Sources confirm it\'s @name\'s birthday..."',
     'Make a playful IT/tech reference — bugs, deployments, coffee, commits, pull requests. Fun and nerdy.',
-    'Write it as if the whole remote team dropped their laptops and opened Slack just for this moment.',
+    'Write it as if the whole remote team paused everything and flooded Slack just to celebrate this moment.',
     'Use a video game metaphor — they\'re leveling up, unlocking achievements, new season starting.',
     'Be unexpectedly philosophical for one sentence, then completely flip to party mode.',
     'Start with a fake complaint ("The problem with @name is...") that turns into a compliment.',
@@ -77,7 +77,7 @@ Use this specific angle for the message: ${pickBirthdayStyle()}
 Good examples for inspiration (vary the structure, don't copy):
 1. "BREAKING: Sources confirm it's @Roman Shelekhov's birthday. Witnesses report confetti, cake, and an uncontrollable urge to mute all Slack notifications. More updates as the party develops."
 2. "The problem with @Marina Zavalii is that she makes everyone else look bad by being too good. Happy Birthday — today we officially put our jealousy on hold and just celebrate you."
-3. "@Bodya Marchenko just unlocked a new achievement: +1 year of being absolutely unstoppable. Collect your cake, close your IDE, and enjoy your well-deserved day off."`,
+3. "@Bodya Marchenko just unlocked a new achievement: +1 year of being absolutely unstoppable. Grab your cake and soak up all the birthday energy — you've more than earned it."`,
       },
     ],
   });
