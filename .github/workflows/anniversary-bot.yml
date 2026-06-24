@@ -2,7 +2,7 @@ name: Anniversaries (14:00 MSK)
 
 on:
   schedule:
-    - cron: '0 11 * * 1-5'
+    - cron: '0 7 * * 1-5'
   workflow_dispatch:
 
 jobs:
