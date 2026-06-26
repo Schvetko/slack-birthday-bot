@@ -26,16 +26,16 @@ async function fetchRandomBirthdayGif() {
 
 function pickBirthdayStyle() {
   const styles = [
-    'Start with a dramatic or unexpected statement about birthdays or aging, then pivot to celebrating them. Surprising opener.',
-    'Reference something universally relatable about birthdays — cake, candles, getting older — with a funny twist.',
-    'Open with "Yo" or a casual street-style greeting. Keep it fun and informal, like a message from a cool friend.',
-    'Use a food or cooking metaphor — they\'re the secret ingredient, the missing spice, the chef\'s special.',
-    'Frame it as a breaking news alert. "BREAKING: Sources confirm it\'s @name\'s birthday..."',
-    'Make a playful IT/tech reference — bugs, deployments, coffee, commits, pull requests. Fun and nerdy.',
-    'Write it as if the whole remote team paused everything and flooded Slack just to celebrate this moment.',
-    'Use a video game metaphor — they\'re leveling up, unlocking achievements, new season starting.',
-    'Be unexpectedly philosophical for one sentence, then completely flip to party mode.',
-    'Start with a fake complaint ("The problem with @name is...") that turns into a compliment.',
+    'Fake HR/Corporate Mandate (General): Issue an official, highly bureaucratic notice commanding mandatory cake consumption and reckless celebration.',
+    'Mildly Aggressive Interrogation (General): Ask an uncomfortable question (e.g., "Where is your party hat?!", "Why are you still sober?!") and demand they fix it.',
+    'The Fake Work Emergency (Work/IT): Start with a fake urgent request (e.g., "P1 Blocker", "RE: Overtime") and pivot to assigning them the "urgent task" of partying.',
+    'Google Meet / Remote Reality (Remote): Make a joke about celebrating remotely (e.g., wearing sweatpants off-camera, hoping Wi-Fi survives the awkward singing).',
+    'The Overly Honest AI (Tech): Mention that you are just a script running on a server, but your mathematical probability of loving them is 100%.',
+    'Sarcastic Aging Joke (General): Make a playful joke about getting older (e.g., needing breath mints for the candles, pretending they haven\'t aged a day since joining).',
+    'The Reluctant Compliment (General): Pretend that their awesomeness is actually a huge problem for the rest of the team because it makes everyone else look bad.',
+    'Slack Notification Chaos (Remote): Threaten to spam their Slack DMs, tag @here, or urge them to aggressively mute all notifications and disappear into a pile of confetti.',
+    'Breaking News Alert (General): "BREAKING: Sources confirm..." Report on their birthday as if it\'s an unfolding, chaotic news event.',
+    'The Unearned Ego Boost (General): Tell them they are legendary or a superstar, but frame it ironically like "It\'s a tough job being this fabulous, but someone\'s got to do it."',
   ];
   return styles[Math.floor(Math.random() * styles.length)];
 }
@@ -48,24 +48,21 @@ async function generateBirthdayGreeting(name) {
     messages: [
       {
         role: 'user',
-        content: `Write a short, witty birthday message from the company to an employee named ${name}.
-Length: 2-3 sentences max.
+        content: `Act as a slightly unhinged, highly energetic, and playfully sarcastic Slack bot for a remote team.
+Write a short, punchy birthday message to an employee named ${name}.
+Length: 1-3 sentences max. Keep it crisp.
 
 CRITICAL FORMATTING:
 - Mention them exactly as "@${name}" within the text.
-- No intro ("Hey there!"), no sign-off ("Best, Team"), no hashtags. Just the message.
+- NO intros ("Hey there!"), NO sign-offs ("Best, Team"), NO hashtags. Just the raw message.
 
-TONE & STYLE:
-- Casual, tech-savvy, unexpected, and genuinely funny. Target audience: 25-35 y.o. remote IT crowd.
-- STRICTLY AVOID: Boring corporate cliches, generic wishes, and the "you're so great -> we wish you greatness" loops.
-- Keep it natural, like a teammate dropping a casual message in Slack, not a HR template. Feel free to use remote work/tech metaphors naturally.
+TONE & STYLE (CRITICAL - ANTI-SOY PROTOCOL):
+- Vibe: Casual, mildly absurd, playfully bossy. Target audience: 25-35 y.o. remote crowd.
+- STRICTLY AVOID generic AI adjectives and cliches (e.g., "unstoppable", "incredible journey", "masterpiece", "dreams come true").
+- Tone down the forced excitement. Think "chaotic teammate" or "fake corporate bureaucracy" rather than a greeting card.
+- Use remote work/tech metaphors (Slack, Google Meet) ONLY if the chosen style specifically calls for it. Otherwise, keep it universally relatable.
 
-Use this specific angle for the message: ${pickBirthdayStyle()}
-
-Good examples for inspiration (vary the structure, don't copy):
-1. "BREAKING: Sources confirm it's @Roman Shelekhov's birthday. Witnesses report confetti, cake, and an uncontrollable urge to mute all Slack notifications. More updates as the party develops."
-2. "The problem with @Marina Zavalii is that she makes everyone else look bad by being too good. Happy Birthday — today we officially put our jealousy on hold and just celebrate you."
-3. "@Bodya Marchenko just unlocked a new achievement: +1 year of being absolutely unstoppable. Grab your cake and soak up all the birthday energy — you've more than earned it."`,
+Use this specific angle for the message: ${pickBirthdayStyle()}`,
       },
     ],
   });
