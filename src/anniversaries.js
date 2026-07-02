@@ -7,6 +7,7 @@ const slack = new WebClient(process.env.SLACK_BOT_TOKEN);
 const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
 
 const CHANNEL = process.env.ANNIVERSARY_CHANNEL;
+const ANNIVERSARY_FIELD_ID = process.env.ANNIVERSARY_FIELD_ID;
 
 async function fetchRandomAnniversaryGif() {
   const apiKey = process.env.GIPHY_API_KEY;
@@ -109,7 +110,9 @@ async function main() {
 
   let count = 0;
   for (const user of users) {
-    const startDateValue = user.profile?.start_date;
+    const startDateValue = ANNIVERSARY_FIELD_ID
+      ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value
+      : user.profile?.start_date;
     if (!startDateValue) continue;
 
     for (const { date, weekend } of datesToCheck) {

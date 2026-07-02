@@ -28,4 +28,5 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           ANNIVERSARY_CHANNEL: ${{ vars.ANNIVERSARY_CHANNEL }}
+          ANNIVERSARY_FIELD_ID: ${{ vars.ANNIVERSARY_FIELD_ID }}
           GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}

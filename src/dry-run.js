@@ -4,6 +4,7 @@ import { getAllUsers, isBirthdayOn } from './utils.js';
 
 const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
 const BIRTHDAY_FIELD_ID = process.env.BIRTHDAY_FIELD_ID;
+const ANNIVERSARY_FIELD_ID = process.env.ANNIVERSARY_FIELD_ID;
 
 const SEP = '─'.repeat(52);
 
@@ -130,7 +131,9 @@ async function checkAnniversaries(users, month, day) {
 
   const found = [];
   for (const user of users) {
-    const startDateValue = user.profile?.start_date;
+    const startDateValue = ANNIVERSARY_FIELD_ID
+      ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value
+      : user.profile?.start_date;
     if (startDateValue && isAnniversaryOn(startDateValue, month, day)) {
       found.push({ user, years: getAnniversaryYears(startDateValue) });
     }
