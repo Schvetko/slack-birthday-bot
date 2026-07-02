@@ -50,16 +50,23 @@ export async function getAllUsers(token) {
 
   // users.list does not return custom profile fields — fetch them individually
   console.log(`Fetching profiles for ${users.length} users...`);
-  await Promise.all(
-    users.map(async (user) => {
+
+  async function fetchProfileWithRetry(user, retries = 3) {
+    for (let i = 0; i < retries; i++) {
       try {
         const { profile } = await slack.users.profile.get({ user: user.id });
         user.profile = profile;
+        return;
       } catch {
-        // leave profile as-is if fetch fails for one user
+        if (i < retries - 1) await new Promise(r => setTimeout(r, 1000 * (i + 1)));
       }
-    })
-  );
+    }
+  }
+
+  // Fetch in batches of 10 to avoid overwhelming the API
+  for (let i = 0; i < users.length; i += 10) {
+    await Promise.all(users.slice(i, i + 10).map(fetchProfileWithRetry));
+  }
 
   console.log(`Fetched ${users.length} active users.`);
   return users;
