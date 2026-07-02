@@ -1,6 +1,9 @@
 import 'dotenv/config';
 import { WebClient } from '@slack/web-api';
 import Anthropic from '@anthropic-ai/sdk';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { getAllUsers } from './utils.js';
 
 const slack = new WebClient(process.env.SLACK_BOT_TOKEN);
@@ -8,6 +11,14 @@ const anthropic = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
 
 const CHANNEL = process.env.ANNIVERSARY_CHANNEL;
 const ANNIVERSARY_FIELD_ID = process.env.ANNIVERSARY_FIELD_ID;
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+let startDatesOverride = {};
+try {
+  startDatesOverride = JSON.parse(readFileSync(join(__dirname, '../data/start-dates.json'), 'utf8'));
+} catch {
+  // file not found, use empty
+}
 
 async function fetchRandomAnniversaryGif() {
   const apiKey = process.env.GIPHY_API_KEY;
@@ -110,9 +121,10 @@ async function main() {
 
   let count = 0;
   for (const user of users) {
-    const startDateValue = ANNIVERSARY_FIELD_ID
-      ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value
-      : user.profile?.start_date;
+    const startDateValue =
+      (ANNIVERSARY_FIELD_ID ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value : null)
+      || user.profile?.start_date
+      || startDatesOverride[user.id]?.startDate;
     if (!startDateValue) continue;
 
     for (const { date, weekend } of datesToCheck) {
