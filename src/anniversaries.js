@@ -122,9 +122,9 @@ async function main() {
   let count = 0;
   for (const user of users) {
     const startDateValue =
-      (ANNIVERSARY_FIELD_ID ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value : null)
-      || user.profile?.start_date
-      || startDatesOverride[user.id]?.startDate;
+      startDatesOverride[user.id]?.startDate
+      || (ANNIVERSARY_FIELD_ID ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value : null)
+      || user.profile?.start_date;
     if (!startDateValue) continue;
 
     for (const { date, weekend } of datesToCheck) {
