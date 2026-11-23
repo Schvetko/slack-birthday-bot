@@ -131,6 +131,7 @@ async function checkAnniversaries(users, month, day) {
 
   const found = [];
   for (const user of users) {
+    if (user.is_ultra_restricted) continue;
     const startDateValue = ANNIVERSARY_FIELD_ID
       ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value
       : user.profile?.start_date;

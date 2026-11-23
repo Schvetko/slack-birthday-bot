@@ -121,6 +121,8 @@ async function main() {
 
   let count = 0;
   for (const user of users) {
+    // Single-channel guests don't get work anniversary posts
+    if (user.is_ultra_restricted) continue;
     const startDateValue =
       startDatesOverride[user.id]?.startDate
       || (ANNIVERSARY_FIELD_ID ? user.profile?.fields?.[ANNIVERSARY_FIELD_ID]?.value : null)
